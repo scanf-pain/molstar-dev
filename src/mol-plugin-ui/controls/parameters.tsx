@@ -28,6 +28,7 @@ import { ArrowDownwardSvg, ArrowDropDownSvg, ArrowRightSvg, ArrowUpwardSvg, Book
 import { legendFor } from './legend';
 import { LineGraphComponent } from './line-graph/line-graph-component';
 import { Slider, Slider2 } from './slider';
+import { ColorRampControl } from './colorRampControl';
 
 export type ParameterControlsCategoryFilter = string | null | (string | null)[]
 
@@ -801,6 +802,7 @@ export class ColorListControl extends React.PureComponent<ParamProps<PD.ColorLis
 
         const values = this.props.value.colors.map(color => ({ color }));
         return <div className='msp-control-offset'>
+            <div>Here Offsets</div>
             <ObjectListControl name='colors' param={ColorsParam} value={values} onChange={this.colorsChanged} isDisabled={this.props.isDisabled} onEnter={this.props.onEnter} />
             <BoolControl name='isInterpolated' param={IsInterpolatedParam} value={this.props.value.kind === 'interpolate'} onChange={this.isInterpolatedChanged} isDisabled={this.props.isDisabled} onEnter={this.props.onEnter} />
         </div>;
@@ -874,6 +876,7 @@ export class OffsetColorListControl extends React.PureComponent<ParamProps<PD.Co
         });
         values.sort((a, b) => a.offset - b.offset);
         return <div className='msp-control-offset'>
+            <ColorRampControl values={values} isInterpolated={this.props.value.kind === 'interpolate'} onColorsChanged={this.colorsChanged} />
             <ObjectListControl name='colors' param={OffsetColorsParam} value={values} onChange={this.colorsChanged} isDisabled={this.props.isDisabled} onEnter={this.props.onEnter} />
             <BoolControl name='isInterpolated' param={IsInterpolatedParam} value={this.props.value.kind === 'interpolate'} onChange={this.isInterpolatedChanged} isDisabled={this.props.isDisabled} onEnter={this.props.onEnter} />
         </div>;
